@@ -50,7 +50,7 @@ impl Motor {
         self
     }
     pub fn movemoter(&mut self) {
-        match self.motor_status {
+        match self.motor_status { //TODO
             MotorStatus::Forward => {
                 self.in1.set_high();
                 self.in2.set_low();
