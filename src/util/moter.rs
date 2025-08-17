@@ -19,17 +19,18 @@ pub struct Motor{
 
 impl Motor {
     pub fn new(
-        mut in1: Pin<Output, D22>,
-        mut in2: Pin<Output, D23>,
-        mut pwm: Pin<PwmOutput<Timer2Pwm>, D9>,
-        mut in3: Pin<Output, D24>,
-        mut in4: Pin<Output, D25>,
+        mut in1 : Pin<Output, D22>,
+        mut in2 : Pin<Output, D23>,
+        mut in3 : Pin<Output, D24>,
+        mut in4 : Pin<Output, D25>,
+        mut pwm : Pin<PwmOutput<Timer2Pwm>, D9>,
     ) -> Self {
         in1.set_low();
         in2.set_low();
         in3.set_low();
         in4.set_low();
         pwm.enable();
+        pwm.set_duty(128);
         Self {
             in1,
             in2,
@@ -37,7 +38,7 @@ impl Motor {
             in3,
             in4,
             speed : 128,
-            motor_status,
+            motor_status: MotorStatus::Forward,
         }
     }
     pub fn setspeed(&mut self, n_speed: u8) -> &mut Self{
@@ -54,7 +55,26 @@ impl Motor {
             MotorStatus::Forward => {
                 self.in1.set_high();
                 self.in2.set_low();
-
+                self.in3.set_low();
+                self.in4.set_high();
+            },
+            MotorStatus::Backward => {
+                self.in1.set_low();
+                self.in2.set_high();
+                self.in3.set_high();
+                self.in4.set_low();
+            },
+            MotorStatus::TurnRight => {
+                self.in1.set_high();
+                self.in2.set_low();
+                self.in3.set_high();
+                self.in4.set_low();
+            }
+            MotorStatus::TurnLeft => {
+                self.in1.set_low();
+                self.in2.set_high();
+                self.in3.set_low();
+                self.in4.set_high();
             }
         }
     }
@@ -67,17 +87,5 @@ pub enum MotorStatus {
     TurnRight,
 }
 
-
-static mut MOTOR: Option<Motor> = None;
-
-pub fn setup(){
-
-    let dp:Peripherals = Peripherals::take().unwrap();
-    let pins: Pins = arduino_hal::pins!(dp);
-    let mut timer: Timer2Pwm = Timer2Pwm::new(dp.TC2, Prescale64);
-
-}
-
-pub fn _loop(){
-
+pub fn _loop(motor: &mut Motor){
 }
