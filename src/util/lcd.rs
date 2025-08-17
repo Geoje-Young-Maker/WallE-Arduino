@@ -48,6 +48,7 @@ pub fn setup() {
     }
 }
 
+#[inline]
 pub fn _loop(){
     unsafe {
         let mut lcd = LCD.as_mut().unwrap();
