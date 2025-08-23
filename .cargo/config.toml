@@ -7,3 +7,8 @@ runner = "ravedude"
 
 [unstable]
 build-std = ["core"]
+
+[env]
+CC_avr_none = "avr-gcc"
+CXX_avr_none = "avr-g++"
+AR_avr_none = "avr-ar"

@@ -1,8 +1,7 @@
-use arduino_hal::{Peripherals, Pins};
+
 use arduino_hal::port::mode::*;
 use arduino_hal::port::*;
-use arduino_hal::simple_pwm::Prescaler::Prescale64;
-use arduino_hal::simple_pwm::{IntoPwmPin, Timer2Pwm};
+use arduino_hal::simple_pwm::{Timer2Pwm};
 
 
 //PinInit

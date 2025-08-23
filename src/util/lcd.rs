@@ -1,24 +1,12 @@
 use core::fmt::Write;
-use i2c_character_display::{BaseCharacterDisplay, CharacterDisplayPCF8574T, LcdDisplayType};
-use arduino_hal::{I2c, Delay, delay_ms, Peripherals, DefaultClock};
-use arduino_hal::hal::{Atmega, Pins};
-use arduino_hal::pac::TWI;
-use arduino_hal::port::{Pin, D20, D21};
-use arduino_hal::port::mode::{Input, PullUp};
+use i2c_character_display::{CharacterDisplayPCF8574T, LcdDisplayType};
+use arduino_hal::{I2c, Delay, delay_ms, Peripherals};
 
 static mut LCD: Option<CharacterDisplayPCF8574T<I2c, Delay>> = None;
 
 
 pub fn setup(i2c: I2c) {
-
-    let dp = Peripherals::take().unwrap();
-
-
-   
-
     let delay = Delay::new();
-
-
 
     let mut lcd = CharacterDisplayPCF8574T::new(i2c, LcdDisplayType::Lcd20x2, delay);
     let reversede: [u8; 8] = [
@@ -44,7 +32,6 @@ pub fn setup(i2c: I2c) {
     }
 }
 
-#[inline]
 pub fn _loop(){
     unsafe {
         let mut lcd = LCD.as_mut().unwrap();
