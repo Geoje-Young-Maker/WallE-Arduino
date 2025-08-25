@@ -31,7 +31,7 @@
 .global loopasm
 
 setupasm:
-    cbi DDRD, 7
+    sbi DDRD, 7
     cbi PORTD, 7
     ret
 
