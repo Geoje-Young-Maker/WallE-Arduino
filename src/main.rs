@@ -6,8 +6,11 @@ mod util;
 
 use arduino_hal::{delay_ms, I2c, Peripherals};
 use panic_halt as _;
-use arduino_hal::simple_pwm::{IntoPwmPin, Timer2Pwm};
-use arduino_hal::simple_pwm::Prescaler::Prescale64;
+use arduino_hal::simple_pwm::{
+    IntoPwmPin,
+    Timer2Pwm,
+    Prescaler::Prescale64
+};
 use i2c_character_display::{CharacterDisplayPCF8574T, LcdDisplayType};
 use crate::util::moter::{Motor, MotorStatus};
 
