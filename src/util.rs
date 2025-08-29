@@ -1,2 +1,2 @@
 pub mod lcd;
-pub mod moter;
+pub mod motor;
