@@ -32,10 +32,11 @@ pub fn setup(i2c: I2c) {
     }
 }
 
+#[deprecated(note = "이 함수는 딜레이를 포함하고 있어 성능에 영향을 줄 수 있습니다.")]
 pub fn _loop(){
     unsafe {
         let mut lcd = LCD.as_mut().unwrap();
-        delay_ms(2000);
+        delay_ms(2000); 
         lcd.set_cursor(0, 0);
         lcd.print("       WALL-");
         lcd.write_char('\u{0}');
